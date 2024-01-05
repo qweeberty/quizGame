@@ -1,0 +1,46 @@
+# Quiz game using dictionaries
+# 01/03/2024
+
+x = 1
+q = "q"
+
+numCorrect = 0
+score = 0
+questions = {
+    "q1" : "In what city were you born?\n",
+    "q2" : "What year is it?\n",
+    "q3" : "Whos better, Messi or Ronalado\n?",
+    "q4" : "How do you abrebriate Apple?\n"
+}
+
+answerKey = {
+    "q1" : "los angeles",
+    "q2" : "2024",
+    "q3" : "messi",
+    "q4" : "appl"
+}
+
+answer = input("Hello! Would you like to play the quiz game?\n")
+
+if answer != "yes":
+    quit()
+else:
+    print("Lets begin")
+    
+
+for x  in range(1, 5):
+    # automatically asks all questions and collects answers
+    q = q + str(x) 
+    
+    answer = input(questions[q]) # q1, q2, q3, ...
+    if answer == answerKey[q]:
+        print("Correct")
+        numCorrect += 1
+    else:
+        print("Incorrect\nCorrect answer is: " + answerKey[q])
+    
+    q = q[:len(q) - 1] # make q1 be q
+
+
+score = (numCorrect / x) * 100
+print('Score: ' + str(score) + '%')
