@@ -1,0 +1,96 @@
+# Guessing game
+
+import random
+
+def getValidGuess():
+    guess = input("Guess a number from 0 to 20\n")
+    
+    # making sure guess is a number
+    guessInt = getNum(guess) 
+    print(guessInt)
+    
+    # making sure the number is in range
+    guessInt = numInRange(guessInt)
+    return guessInt
+    
+    
+def getNum(guess):
+    # makes sure that the guess is a number
+    while not guess.isdigit():
+        guess = input("Only numbers are allowed.\nGuess a number from 0 to 20\n")
+    
+    guessInt = int(guess)
+    return guessInt # returning the guess as an integer and not string
+    
+    
+def numInRange(guessInt):
+    while not guessInt <= 20:
+        guess = input("Only numbers <= 20 are allowed.\nGuess a number from 0 to 20\n")
+        guessInt = getNum(guess) # making sure its a number
+    return guessInt # return the valid number 
+
+def mixWords():
+    for x in range(0,3):
+        # mixing up the words
+        random.shuffle(potentialWords)
+
+def getRandomWord():
+    num = random.randrange(0, listOfWordsLength) # pick a random word form the list
+    word = potentialWords[num] # get the selected random word
+    return word
+
+def untilCorrectAnswer(guess, attempts):
+    while not word == guess:
+        guess = input("Incorrect! Try again\n")
+        attempts = attempts + 1
+
+    return attempts
+        
+    
+potentialWords = ["phone", "iphone", "computer", "mouse", "display" , "charger", "LED", "gears"]
+listOfWordsLength = len(potentialWords)
+print(listOfWordsLength)
+
+print("Guessing Game")
+print("\n1. Guess a number")
+print("2. Guess a word")
+
+option = input("Enter option\n")
+attempts = 0
+
+
+if option == '1':
+    # generates random number from 0 - 20
+    num = random.randrange(0,20) 
+    print("Shh! Number to guess is: " + str(num))
+    # get a valid guess
+    guessInt = getValidGuess()
+    # now we have a valid guess
+    attempts = attempts + 1 # increments attempt count
+
+    while not guessInt  == num:
+        # keeps asking until its correct
+        print("Incorrect. Try again\n")
+        guessInt = getValidGuess()
+        attempts = attempts + 1
+        
+    
+elif option == '2':
+    mixWords()
+    word = getRandomWord()
+    print("Shh! The Word is: " + word)
+    
+    guess = input("Guess the word that Im thinking about... Its about technology.\n")
+    attempts = attempts + 1
+    
+    attempts = untilCorrectAnswer(guess, attempts)
+    # Now we have the correct answer
+
+else:
+    print("Goodbye")
+    exit()
+    
+print("Correct!")
+print("It took you " + str(attempts) + " attempts!")
+
+
