@@ -1,0 +1,4 @@
+import qrcode # you need to do "pip install qrcode" in the terminal
+
+img = qrcode.make("God 1st") # insert your link or anything you want
+img.save("qrcode.jpg")
